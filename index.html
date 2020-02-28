@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spider2.0</title>
+    <link rel="stylesheet" type="text/css" href="assets/style.css">
+
+    <!-- Plotly CDN -->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    
+    <!-- Elm App compilation -->
+    <script src="elm.js"></script>
+
+    <!-- Custom Plotly components -->
+    <script src="src/community__positive.js"></script>
+</head>
+
+<body>
+    <main id="elm__app"></main>
+
+    <script>
+        // ***********************************************
+        // Elm App initialization
+
+        const app = Elm.Main.init({
+            node: document.getElementById("elm__app")
+        });
+
+        // ***********************************************
+        // Plotly component construction and DOM insertion
+
+        community_positive();
+
+    </script>
+
+</body>
+</html>
