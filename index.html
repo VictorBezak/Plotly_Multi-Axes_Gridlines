@@ -9,22 +9,16 @@
     <!-- Plotly CDN -->
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     
-    <!-- Custom Plotly components -->
-    <script src="js/positive_verbose.js"></script>
-    <script src="js/positive_condensed.js"></script>
-    <script src="js/negative.js"></script>
+    <!-- Custom Plotly scripts -->
+    <script src="multiAxis.js"></script>
 </head>
 
 <body>
     <div id="plotly_graph"></div>
 
     <script>
-        // ***********************************************
-        // Plotly component construction and DOM insertion
-
-        // positive_verbose();
-        // positive_condensed();
-        negative();
+        // Plotly construction and DOM insertion
+        multiAxis();
     </script>
 </body>
 </html>

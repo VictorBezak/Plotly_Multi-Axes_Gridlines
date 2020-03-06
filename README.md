@@ -1,19 +1,17 @@
 # Multiple Axes and In-Sync Gridlines
 
 I do my best to cover all details, but if you'd like the quick
-answer (which may sound complicating out of context), I'll
-provide a summary at the end which you could skip to.
+answer (which may sound complicated when out of context), I'll
+provide a concise summary at the end.
 
-Or even better, go straight to the code!
-
-`positiveValues_VERBOSE.js` contains slightly more comments
-than the alternative `positiveValues_CONDENSED.js`.  
-
-The positive values distinction is there because there is a
-slightly modified method for if your data contains any
-negative y-values. This will be covered shortly.
+Or even better, go straight to the code! `multiAxis.js` 
 
 However, for the full explanation, please continue below!
+
+> NOTE
+> There is still testing being done to find the best way to also
+> calculate for y-axes that have a max value that is between -1 and +1.
+> This final update should be released by March 14th, 2020.
 
 ***
 
@@ -89,7 +87,7 @@ Plotly.newPlot( yourDiv, data, layout, config )
 
 We'll get this result:
 
-![out-of-sync](images/positive1.png)
+![out-of-sync](assets/images/graph1.png)
 
 ***
 
@@ -142,7 +140,7 @@ yaxis2: {
 
 The addittion of these dticks will give us this graph:
 
-![in-sync+badTickNums](images/positive2.png)
+![in-sync+badTickNums](assets/images/graph2.png)
 
 Great! Now each y-axis is divided into 5 parts, and our
 gridlines are in-sync! We can stop now... oh what's that?
@@ -267,7 +265,7 @@ let layout = {
 }
 ```
 
-![out-of-sync+cleanTickValues](images/positive3.png)
+![out-of-sync+cleanTickValues](assets/images/graph3.png)
 
 You'll notice that our gridlines are out of sync again; Not
 to worry, we'll get to that in a second! But now we have
@@ -356,17 +354,17 @@ have two options:
 > y_max refers to the max value from the axis data at the
 > beginning of the program--this value should never change.
 > Up until now we haven't had to think about this because
-> our range max has always been equal to our max value.  
+> our max value has always been equal to our range max.  
 >  
 > But now that we want to adjust the max, we would create a
 > new variable called `y_range_max` which we could raise or
-> lower and then use in our layout.yaxis.range varibale
+> lower and then use in our layout.yaxis.range variable
 > instead of y_max:  
 >  
 > yaxis: { range: [0, y_range_max] }  
 >  
 > Now we can have our preserved y_max value, and another one
-> to adjust our range with, y_range_max.
+> to adjust our range with: y_range_max.
 
 Out of our two options, we don't want to adjust the dtick,
 because we did special operations to find our nice, clean,
@@ -397,7 +395,7 @@ And as we just said, we never want to lower a range max, so
 the answer we're all looking for is in #1
 
 FINALLY! Let's see how this looks in our code, and render
-one last graph.
+another graph.
 
 ```javascript
 // Finding initial ratios for comparison
@@ -440,54 +438,32 @@ yaxis2: {
 }
 ```
 
-![in-sync+niceTickValues](images/positive4.png)
+![in-sync+niceTickValues](assets/images/graph4.png)
 
 ***
 
-## OPTIONAL BUT IMPORTANT TIP - Increasing Range Maxes
+## UPDATING TO HANDLE NEGATIVE VALUES
 
-At this point you'll notice that your gridlines are
-perfectly in-sync. You could stop here, but you may also
-notice that one of your traces is uncomfortably close to the
-top of the graph and decide you want to increase both axis
-ranges to bring more of the graph into view.
+If you've tinkered enough with the above code, you may have realized that it
+doesn't exactly play nicely with negative data values.
+The ability to incorporate and proportionally display negative values, is one
+that we'll have to define addittional logic for. These additions are commented
+pretty well in the source code of `multiAxes.js`, so we'll keep it short and
+sweet here!  
 
-This range extension is entirely optional, but if you decide
-you'd like to do this for the reasons stated above, you must
-make sure you scale your axis ranges proportionally
-(relative to the global ratio).
+Two Major Changes:
 
-The below operation will give you proportional values with
-which you can extend your ranges while also keeping the
-gridlines in-sync.
+1. Instead of using y_max (0-maxValue) to calculate our initial d_ticks, we have
+   to use y_range (minValue-MaxValue). This allows us to calculate margins that
+   take the entire graph into consideration, and not just the positive values.
+2. We must find both the global_negative and global_positive ratios so that we
+   can independently scale our range minimums and range maximums
 
-```javascript
-y1_range_extension = (y1_range_max / 2) / global_dtick_ratio
-y2_range_extension = (y2_range_max / 2) / global_dtick_ratio
+The code increase from these changes is considerable, so I'll leave them in
+`multiAxes.js` for you to look over! However, the graphs
+we'll be able to render now are far more dynamic.
 
-
-yaxis: {
-    title: 'Apples',
-    side: 'left',
-    range: [0, y1_range_max + y1_range_extension],
-    dtick: y1_dtick
-},
-yaxis2: {
-    title: 'Oranges',
-    side: 'right',
-    range: [0, y2_range_max + y2_range_extension],
-    overlaying: 'y',
-    dtick: y2_dtick
-    // zeroline: false,
-    // showgrid: false
-
-    /* Once you're confident that your axis grid are aligned
-    to satisfaction, you can set those last two to false to
-    clean up any resulting line overlap */
-}
-```
-
-![in-sync+niceTickValues](images/positive5.png)
+![in-sync+niceTickValues](assets/images/graph5.png)
 
 ***
 
@@ -498,20 +474,15 @@ with eachother?
 
 ## ANSWER
 
-You must calculate for their dtick-to-maxValue ratios, and
-then raise the range max of the axis with a smaller ratio
-to make it match the ratio of the other axis. Once the
-ratios are in-sync, the gridlines will be in-sync.
-
-## SUMMARY
-
-We need our y-axes to share the same dtick ratio, so that
---relative to eachother--their grids will scale
-proportionally and remain in-sync.
-
-To make sure they share the same ratio, we will take
-whichever ratio is greatest, and apply it to the other axis
-as well.
-
-The new ratio is applied to the other axis by keeping its
-dtick value the same, but increasing it's max range value.
+1. calculate y-axis ranges
+2. round range to a nice number
+3. divide rounded-range by number of gridlines you want (this gives you your
+   dtick value)
+4. divide your dtick value by the range to get the dtick ratio
+5. do this for all axes and take the greatest dtick ratio to be the global dtick
+   ratio
+6. adjust the range maximums and minimums of all other axes so that they also
+   have the global ratio
+7. once all of your axes have the same dtick_ratio, they will have the same
+   number of gridlines, and therefor their gridlines will all be in-line with
+   each other
