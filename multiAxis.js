@@ -11,6 +11,7 @@ multiAxis = () => {
     //**************************************************************************
 
     const X_AXIS = ["Jan", "Feb", "Mar", "Apr", "May"]
+    const GRIDLINES = 4
 
 
     // ************************************************************************
@@ -26,18 +27,24 @@ multiAxis = () => {
         y1_range = y1_max
     }
 
+    y1_range = y1_range * 1000  // mult by 1000 to account for ranges < 1
     y1_len = Math.floor(y1_range).toString().length
+
     y1_pow10_divisor = Math.pow(10, y1_len - 1)
     y1_firstdigit = Math.floor(y1_range / y1_pow10_divisor)
-    y1_max_base = y1_pow10_divisor * y1_firstdigit
+    y1_max_base = y1_pow10_divisor * y1_firstdigit / 1000  // div by 1000 to account for ranges < 1
 
-    y1_dtick = y1_max_base / 5
+    y1_dtick = y1_max_base / GRIDLINES
+
+    y1_pow10_divisor = Math.pow(10, y1_len - 1) / 1000  // reset for logging purposes
+    y1_range = y1_range / 1000  // range reset
 
 
     // ************************************************************************
     // Y2 Calculations
 
-    const Y2_AXIS = [-241.21, 365.24, 265.21, 204.34, 1129]
+    // const Y2_AXIS = [-241.21, 365.24, 265.21, 204.34, 1129]
+    const Y2_AXIS = [-0.8, 0.09, 0.01, 0.13, 0.42]
     y2_min = Math.min(...Y2_AXIS)
     y2_max = Math.max(...Y2_AXIS)
 
@@ -47,12 +54,17 @@ multiAxis = () => {
         y2_range = y2_max
     }
 
+    y2_range = y2_range * 1000  // mult by 1000 to account for ranges < 1
     y2_len = Math.floor(y2_range).toString().length
+
     y2_pow10_divisor = Math.pow(10, y2_len - 1)
     y2_firstdigit = Math.floor(y2_range / y2_pow10_divisor)
-    y2_max_base = y2_pow10_divisor * y2_firstdigit
+    y2_max_base = y2_pow10_divisor * y2_firstdigit / 1000  // div by 1000 to account for ranges < 1
 
-    y2_dtick = y2_max_base / 5
+    y2_dtick = y2_max_base / GRIDLINES
+
+    y2_pow10_divisor = Math.pow(10, y2_len - 1) / 1000  // reset for logging purposes
+    y2_range = y2_range / 1000  // range reset
 
 
     /**************************************************************************/
@@ -111,7 +123,7 @@ multiAxis = () => {
     if (negative) {
         y1_range_min = (global_negative_ratio) * y1_dtick * -1
         y2_range_min = (global_negative_ratio) * y2_dtick * -1
-    }else {  // If no negatives, baseline is set to zero
+    } else {  // If no negatives, baseline is set to zero
         y1_range_min = 0
         y2_range_min = 0
     }
@@ -231,10 +243,12 @@ multiAxis = () => {
     console.log("y1_max: ", y1_max)
     console.log("y1_range: ", y1_range)
     console.log("")
-    console.log("y1_len: ", y1_len)
-    console.log("y1_pow10_divisor: ", y1_pow10_divisor)
-    console.log("y1_firstdigit: ", y1_firstdigit)
-    console.log("y1_max_base: ", y1_max_base)
+    try {
+        console.log("y1_len: ", y1_len)
+        console.log("y1_pow10_divisor: ", y1_pow10_divisor)
+        console.log("y1_firstdigit: ", y1_firstdigit)
+        console.log("y1_max_base: ", y1_max_base)
+    } catch (e) {}
     console.log("")
     console.log("y1_dtick: ", y1_dtick)
 
@@ -245,10 +259,12 @@ multiAxis = () => {
     console.log("y2_max: ", y2_max)
     console.log("y2_range: ", y2_range)
     console.log("")
-    console.log("y2_len: ", y2_len)
-    console.log("y2_pow10_divisor: ", y2_pow10_divisor)
-    console.log("y2_firstdigit: ", y2_firstdigit)
-    console.log("y2_max_base: ", y2_max_base)
+    try {
+        console.log("y2_len: ", y2_len)
+        console.log("y2_pow10_divisor: ", y2_pow10_divisor)
+        console.log("y2_firstdigit: ", y2_firstdigit)
+        console.log("y2_max_base: ", y2_max_base)
+    } catch (e) {}
     console.log("")
     console.log("y2_dtick: ", y2_dtick)
 

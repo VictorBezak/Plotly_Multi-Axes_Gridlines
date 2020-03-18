@@ -8,10 +8,8 @@ Or even better, go straight to the code! `multiAxis.js`
 
 However, for the full explanation, please continue below!
 
-> NOTE
-> There is still testing being done to find the best way to also
-> calculate for y-axes that have a max value that is between -1 and +1.
-> This final update should be released by March 14th, 2020.
+> NOTE  
+> Further testing and optimization in progress. Watch repo for future updates.
 
 ***
 
