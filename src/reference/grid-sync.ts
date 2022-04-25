@@ -1,13 +1,3 @@
-type AxisMeta = {
-   dtick: number;
-   dtickRatio: number;
-   min: number;
-   max: number;
-   rangeDelta: number;
-   rangeMin?: number;
-   rangeMax?: number;
-};
-
 export default class GridSync {
    private readonly traces: Trace[];
    private readonly axes: YAxisLayout[];

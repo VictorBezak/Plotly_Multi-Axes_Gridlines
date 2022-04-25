@@ -1,3 +1,14 @@
+type AxisMeta = {
+   dtick: number;
+   dtickRatio: number;
+   min: number;
+   max: number;
+   rangeDelta: number;
+   rangeMin?: number;
+   rangeMax?: number;
+};
+
+
 type Trace = {
    name: string;
    type: string;
