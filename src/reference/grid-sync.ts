@@ -4,9 +4,9 @@ export default class GridSync {
    private readonly gridlineCount: number;
 
    constructor(traces: Trace[], yAxes: YAxisLayout[], gridlineCount: number) {
-      this.gridlineCount = gridlineCount;
       this.traces = traces;
       this.axes = yAxes;
+      this.gridlineCount = gridlineCount;
    }
 
    /**
