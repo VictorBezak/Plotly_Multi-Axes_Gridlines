@@ -102,9 +102,7 @@ export default class GridSync {
     * dtick docs: https://plotly.com/javascript/reference/#layout-yaxis-dtick
     */
    private dtickCalculate(range: number): number {
-      // multiply by 1000 so calculations hold for ranges < 1
-      const adjustedRange = range * 1000;
-      const rangeBase = this.bigFloor(adjustedRange);
+      const rangeBase = this.bigFloor(range);
 
       return rangeBase / this.gridlineCount;
    }
@@ -115,9 +113,13 @@ export default class GridSync {
     * Example: 425837 => 400000
     */
     private bigFloor(value: number) {
-      const valueString = Math.floor(value).toString();
+      // multiply by 1000 so calculations hold for ranges < 1
+      const inflatedValue = value * 1000;
+
+      const valueString = Math.floor(inflatedValue).toString();
       const firstDigit = Number(valueString[0]);
 
-      return firstDigit * Math.pow(10, valueString.length - 1);
+      // Now that we're done with calculations, divide back
+      return firstDigit * Math.pow(10, valueString.length - 1) / 1000;
    }
 }
