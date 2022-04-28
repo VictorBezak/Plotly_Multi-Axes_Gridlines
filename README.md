@@ -4,6 +4,8 @@
 - setup for graph and implementation of GridSync contained in `src/index.js`
 - `index.js` invoked from `src/index.html`
 
+> If you want to view the original js file, see `src/reference/original.js`
+
 ---
 
 # Multiple Axes and In-Sync Gridlines
@@ -93,7 +95,7 @@ Plotly.newPlot( yourDiv, data, layout, config )
 
 We'll get this result:
 
-![out-of-sync](assets/images/graph1.png)
+![out-of-sync](src/assets/images/graph1.png)
 
 ***
 
@@ -146,7 +148,7 @@ yaxis2: {
 
 The addittion of these dticks will give us this graph:
 
-![in-sync+badTickNums](assets/images/graph2.png)
+![in-sync+badTickNums](src/assets/images/graph2.png)
 
 Great! Now each y-axis is divided into 5 parts, and our
 gridlines are in-sync! We can stop now... oh what's that?
@@ -271,7 +273,7 @@ let layout = {
 }
 ```
 
-![out-of-sync+cleanTickValues](assets/images/graph3.png)
+![out-of-sync+cleanTickValues](src/assets/images/graph3.png)
 
 You'll notice that our gridlines are out of sync again; Not
 to worry, we'll get to that in a second! But now we have
@@ -444,7 +446,7 @@ yaxis2: {
 }
 ```
 
-![in-sync+niceTickValues](assets/images/graph4.png)
+![in-sync+niceTickValues](src/assets/images/graph4.png)
 
 ***
 
@@ -469,7 +471,7 @@ The code increase from these changes is considerable, so I'll leave them in
 `multiAxes.js` for you to look over! However, the graphs
 we'll be able to render now are far more dynamic.
 
-![in-sync+niceTickValues](assets/images/graph5.png)
+![in-sync+niceTickValues](src/assets/images/graph5.png)
 
 ***
 
