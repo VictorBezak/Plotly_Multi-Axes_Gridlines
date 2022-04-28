@@ -1,7 +1,7 @@
 # Module Details
 
 - GridSync logic contained in `src/grid-sync.js`
-- setup for graph and implementation of GridSync contained in `src/index.js`
+- setup for graph and example implementation of GridSync contained in `src/index.js`
 - `index.js` invoked from `src/index.html`
 
 > If you want to view the original js file, see `src/reference/original.js`
