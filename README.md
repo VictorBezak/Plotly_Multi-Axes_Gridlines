@@ -1,3 +1,11 @@
+# Module Details
+
+- GridSync logic contained in `src/grid-sync.js`
+- setup for graph and implementation of GridSync contained in `src/index.js`
+- `index.js` invoked in `src/index.html`
+
+---
+
 # Multiple Axes and In-Sync Gridlines
 
 I do my best to cover all details, but if you'd like the quick
