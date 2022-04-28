@@ -1,3 +1,11 @@
+# Update (April 28th, 2022)
+
+Check out the new `module` branch on this repo for cleaner class-based approach. The motivation with
+this refactor was to make the logic more functional and easier to follow, while also making it easier
+to test and modify.
+
+---
+
 # Multiple Axes and In-Sync Gridlines
 
 I do my best to cover all details, but if you'd like the quick
