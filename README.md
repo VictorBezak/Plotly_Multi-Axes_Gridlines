@@ -8,6 +8,7 @@ to test and modify.
 > This logic is in-progress to be added as a native Plotly feature. Projected completion by Q4 of 2022.
 
 ---
+---
 
 # Multiple Axes and In-Sync Gridlines
 
