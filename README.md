@@ -4,7 +4,7 @@ Check out the new `module` branch on this repo for cleaner class-based approach.
 this refactor was to make the logic more functional and easier to follow, while also making it easier
 to test and modify.
 
-> NOTE
+> NOTE  
 > This logic is in-progress to be added as a native Plotly feature. Projected completion by Q4 of 2022.
 
 ---
