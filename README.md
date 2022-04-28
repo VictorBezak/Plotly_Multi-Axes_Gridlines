@@ -7,6 +7,7 @@
 > If you want to view the original js file, see `src/reference/original.js`
 
 ---
+---
 
 # Multiple Axes and In-Sync Gridlines
 
