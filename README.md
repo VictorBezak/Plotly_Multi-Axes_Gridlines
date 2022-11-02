@@ -1,3 +1,9 @@
+# Update (November 2nd, 2022)
+
+I've been receiving help for the last 5 weeks from fellow developer, Filipe Santiago @filipesantiagoAM, and together we've managed to put together an MVP solution! This still needs some tests and approvals before being merged, but sharing the PR here for public visibility!
+
+[https://github.com/plotly/plotly.js/pull/6356](https://github.com/plotly/plotly.js/pull/6356)
+
 # Update (April 28th, 2022)
 
 Check out the new `module` branch on this repo for cleaner class-based approach. The motivation for
