@@ -1,3 +1,8 @@
+# Update (January 19th, 2022)
+
+This functionality has been fully released as a native part of Plotly.js (:
+See release notes here: https://github.com/plotly/plotly.js/releases/tag/v2.18.0
+
 # Update (November 2nd, 2022)
 
 I've been receiving help for the last 5 weeks from fellow developer, Filipe Santiago @filipesantiagoAM, and together we've managed to put together an MVP solution! This still needs some tests and approvals before being merged, but sharing the PR here for public visibility!
